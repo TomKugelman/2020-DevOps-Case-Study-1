@@ -9,7 +9,7 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                ansiblePlaybook(playbook: 'playbook-deploy.yaml')
+                ansiblePlaybook(playbook: 'test-playbook.yml')
             }
         }
     }
