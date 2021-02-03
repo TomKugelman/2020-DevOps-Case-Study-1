@@ -23,8 +23,7 @@
       apt:
         name: ['docker-ce', 'docker-ce-cli', 'containerd.io']
         state: present
-        
----
+
 - name: Play 2
   hosts: worker
   become_user: tom
