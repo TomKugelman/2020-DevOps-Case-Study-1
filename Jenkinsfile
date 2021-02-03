@@ -9,8 +9,7 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                sh "./2020-DevOps-Case-Study-1/playbook-deploy.yaml"
-                
+                ansiblePlaybook(playbook: 'playbook-deploy.yaml')
             }
         }
     }
