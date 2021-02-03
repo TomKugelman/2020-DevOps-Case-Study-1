@@ -9,7 +9,8 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                ansiblePlaybook(playbook: 'playbook-deploy.yml')
+                //ansiblePlaybook(playbook: 'playbook-deploy.yml')
+                ansiblePlaybook(playbook: 'test-playbook.yml')
                 //sh 'ansible tom@worker -m ping'
             }
         }
