@@ -45,6 +45,9 @@
           - docker-ce-cli
           - containerd.io
         state: present
+
+    - name: Change docker.sock permissions (not safe)
+      command: sudo chmod 777 /var/run/docker.sock
     
     - name: Enable service docker, and enable persistently
       service: 
@@ -75,20 +78,17 @@
         name: kubelet
         enabled: yes
     
-    - name: Reboot all the kubernetes nodes.
-      reboot:
-        post_reboot_delay: 10
-        reboot_timeout: 40
-        connect_timeout: 60
-        test_command: uptime
+    #- name: Reboot all the kubernetes nodes.
+     # reboot:
+      #  post_reboot_delay: 10
+       # reboot_timeout: 40
+        #connect_timeout: 60
+        #test_command: uptime
 
 - name: Play 2
   hosts: tom@worker
   become: true
   tasks: 
-    - name: Start minikube
-      command: minikube start
-      
     - name: Copy kubernetes YAML
       ansible.builtin.copy:
         src: 2020-DevOps-Case-Study-1/kubernetes.yml
@@ -97,6 +97,6 @@
         mode: 7777
     
     - name: Apply kubernetes YAML
-      command: kubetcl create -f /App/kubernetes.yml
+      command: kubetcl create -f /etc/kubernetes.yml
 
 
