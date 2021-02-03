@@ -6,9 +6,13 @@
     - name: apt update
       command: sudo apt update
 
-    - name: Install Minikube
+    - name: Get Minikube info
       get_url: wget https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 
-      command: chmod +x minikube-linux-amd64, 
+      
+    - name: change permissions for minikube  
+      command: chmod +x minikube-linux-amd64
+      
+    - name: move minikube into local/bin/minikube
       command: sudo mv minikube-linux-amd64 /usr/local/bin/minikube
     
     - name: Install kubectl
