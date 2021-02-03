@@ -1,5 +1,5 @@
 ---
-  name: Play 1
+- name: Play 1
   hosts: worker
   become_user: tom
   tasks:
