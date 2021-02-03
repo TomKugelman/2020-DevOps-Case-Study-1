@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'rmdir -f 2020-DevOps-Case-Study-1'
+                sh 'rm -rf 2020-DevOps-Case-Study-1'
                 
                 git url: 'https://github.com/TomKugelman/2020-DevOps-Case-Study-1'
                 sh "docker build -t tomkugelman/capstone-flask:latest ."
