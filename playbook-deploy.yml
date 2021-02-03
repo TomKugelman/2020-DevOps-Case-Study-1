@@ -4,7 +4,8 @@
   become_user: tom
   tasks:
     - name: apt update
-      command: apt update
+      apt:
+        update_cache: yes
     - name: Install Minikube
       command: [wget https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64, chmod +x minikube-linux-amd64, sudo mv minikube-linux-amd64 /usr/local/bin/minikube]
     - name: Install kubectl
