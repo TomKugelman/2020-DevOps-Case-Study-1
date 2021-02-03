@@ -96,7 +96,9 @@
         owner: tom
         mode: 7777
     
-    - name: Apply kubernetes YAML
-      command: kubetcl create -f /etc/kubernetes.yml
+    - name: Create a Deployment by reading the definition from a local file
+      community.kubernetes.k8s:
+        state: present
+        src: /etc/kubernetes.yml
 
 
