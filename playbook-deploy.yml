@@ -13,32 +13,37 @@
       command: chmod +x minikube-linux-amd64
       
     - name: move minikube into local/bin/minikube
-      command: sudo mv minikube-linux-amd64 /usr/local/bin/minikube
+      command: sudo mv minikube-linux-amd64 /usr/local/bin/minikube 
     
-    - name: Install kubectl
-      command: curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl
+    - name: Installing Prerequisites for Kubernetes
+      apt: 
+        name:
+         - apt-transport-https
+         - ca-certificates
+         - curl
+         - gnupg-agent
+         - vim
+         - software-properties-common
+        state: present
     
-    #- name: change permission for kubectl
-      #command: chmod +x ./kubectl
-
-    - name: move kubectl
-      command: sudo mv ./kubectl /usr/local/bin/kubectl
+    - name: Add Docker’s official GPG key
+      apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        state: present
     
-    - name: Install Docker CE Pre-reqs
-      apt:
-        name: ['apt-transport-https', 'ca-certificates', 'curl', 'gnupg2', 'software-properties-common']
-        update_cache: yes
-    
-    - name: Add Docker GPG key
-      apt_key: url=https://download.docker.com/linux/ubuntu/gpg
-    
-    - name: Add Docker API Repo
+    - name: Add Docker Repository
       apt_repository:
-        repo: deb [arch=amd64] https://download.docker.com/{{ ansible_system | lower }}/{{ ansible_distribution | lower }} {{ ansible_distribution_release }} stable
+        repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu xenial stable
+        state: present
+        filename: docker
+        mode: 0600
     
-    - name: Install Docker CE
-      apt:
-        name: ['docker-ce', 'docker-ce-cli', 'containerd.io']
+    - name: Install Docker Engine.
+      apt: 
+        name:
+          - docker-ce
+          - docker-ce-cli
+          - containerd.io
         state: present
 
 - name: Play 2
@@ -47,13 +52,10 @@
   tasks: 
     - name: Copy kubernetes YAML
       ansible.builtin.copy:
-        src: /App/kubernetes.yml
+        src: 2020-DevOps-Case-Study-1/kubernetes.yml
         dest: /etc/kubernetes.yml
         owner: tom
         mode: 7777
-    
-    - name: Start minikube
-      command: minikube Start
     
     - name: Apply kubernetes YAML
       command: kubetcl create -f /App/kubernetes.yml
