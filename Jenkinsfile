@@ -6,7 +6,7 @@ pipeline {
             steps {
                 dir('/App') {
                     sh 'chmod 7777 /App'
-                    git url: 'https://github.com/TomKugelman/sba.kubernetes-cluster'
+                    git url: 'https://github.com/TomKugelman/2020-DevOps-Case-Study-1'
                     sh "docker build -t tomkugelman/capstone-flask:latest ."
                     withDockerRegistry([ credentialsID: "DockerHub"]) {
                         sh "docker push tomkugelman/capstone-flask:latest"
