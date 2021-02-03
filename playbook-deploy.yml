@@ -91,12 +91,12 @@
   tasks: 
     - name: Copy kubernetes YAML
       ansible.builtin.copy:
-        src: 2020-DevOps-Case-Study-1/kubernetes.yml
+        src: /var/lib/jenkins/workspace/capstone-pipeline/kubernetes.yml
         dest: /etc/kubernetes.yml
         owner: tom
         mode: 7777
     
     - name: Apply kubernetes YAML
-      command: kubectl create -f /App/kubernetes.yml
+      command: kubectl create -f /etc/kubernetes.yml
 
 
