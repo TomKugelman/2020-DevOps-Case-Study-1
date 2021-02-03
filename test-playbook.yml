@@ -1,7 +1,7 @@
 ---
-name: Play 1
-hosts: worker
-become_user: tom
-tasks:
-  - name: apt update
-    command: apt update
+  name: Play 1
+  hosts: worker
+  become_user: tom
+  tasks:
+    - name: apt update
+      command: apt update
