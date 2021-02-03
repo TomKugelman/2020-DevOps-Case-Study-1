@@ -4,8 +4,9 @@ pipeline {
     stages {
         stage('Build') {
             steps {
+                sh 'mkdir /App'
+                sh 'chmod 7777 /App'
                 dir('/App') {
-                    sh 'chmod 7777 /App'
                     git url: 'https://github.com/TomKugelman/2020-DevOps-Case-Study-1'
                     sh "docker build -t tomkugelman/capstone-flask:latest ."
                     withDockerRegistry([ credentialsID: "DockerHub"]) {
