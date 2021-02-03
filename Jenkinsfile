@@ -8,7 +8,7 @@ pipeline {
                 
                 git url: 'https://github.com/TomKugelman/2020-DevOps-Case-Study-1'
                 sh "docker build -t tomkugelman/capstone-flask:latest ."
-                withDockerRegistry([ credentialsID: "DockerHub"]) {
+                withDockerRegistry([ credentialsId: "DockerHub"]) {
                     sh "docker push tomkugelman/capstone-flask:latest"
                 }
             }
