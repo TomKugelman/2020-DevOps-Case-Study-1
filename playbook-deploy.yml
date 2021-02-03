@@ -7,7 +7,7 @@
       command: sudo apt update
 
     - name: Get Minikube info
-      get_url: wget https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 
+      get_url: https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 
       
     - name: change permissions for minikube  
       command: chmod +x minikube-linux-amd64
