@@ -18,8 +18,8 @@
     - name: Install kubectl
       command: curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl
     
-    - name: change permission for kubectl
-      command: chmod +x ./kubectl
+    #- name: change permission for kubectl
+      #command: chmod +x ./kubectl
 
     - name: move kubectl
       command: sudo mv ./kubectl /usr/local/bin/kubectl
