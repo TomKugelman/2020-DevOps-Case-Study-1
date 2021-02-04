@@ -93,9 +93,9 @@
     - name: Copy kubernetes YAML
       ansible.builtin.copy:
         src: /var/lib/jenkins/workspace/capstone-pipeline/kubernetes.yml
-        dest: /etc/kubernetes.yml
+        dest: ~/kubernetes.yml
         owner: tom
         mode: 7777
     
     - name: Apply kubernetes YAML
-      command: microk8s kubectl create -f /var/lib/jenkins/workspace/capstone-pipeline/kubernetes.yml
+      command: microk8s kubectl create -f ~/kubernetes.yml
