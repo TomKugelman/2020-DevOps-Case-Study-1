@@ -89,7 +89,10 @@
     # This is what we will use in place of minikube
     - name: install microk8s
       snap:
+        name:
         - microk8s
+        state: present
+
 
 - name: Play 2
   hosts: tom@worker
