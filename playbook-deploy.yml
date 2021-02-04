@@ -70,6 +70,7 @@
       apt: 
         name:
           - kubectl
+          - kubeadm
           - kubelet
         state: present
     
@@ -97,6 +98,4 @@
         mode: 7777
     
     - name: Apply kubernetes YAML
-      command: kubectl create -f /etc/kubernetes.yml
-
-
+      command: microk8s kubectl create -f /var/lib/jenkins/workspace/capstone-pipeline/kubernetes.yml
