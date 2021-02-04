@@ -7,6 +7,7 @@ Please follow the live [document](https://docs.google.com/document/d/17OwlITE-yP
 - Our target machine is an ubuntu-server VM, I will refer to it as our "client machine". Note: Because it is the server version it has no GUI.
 - Ensure that both instances have "openssh-server" installed with a "sudo apt install \<package name\>".
 - Generate a public ssh-key for your master-controller and copy it into the authentication folder of your client-machine. Also enable passwordless sudo execution for your user if one was created (ubuntu-server will default as root and will not create a user for you) through the "sudo visudo" command. Copy your user from the top of the file, and paste it at the bottom of this file, then delete the original reference to your user. Add "NOPASSWD: ALL" to the end of the line you just pasted at the bottom (remove the extra "ALL").
+- The installations for our client machine will be handled by our playbook that you can view from this repo.
 
 ## Steps 
 - Add required files to local project. These include: requirements.txt, Dockerfile, Jenkinsfile, kubernetes.yml, at minimum.
@@ -22,6 +23,7 @@ Please follow the live [document](https://docs.google.com/document/d/17OwlITE-yP
 - Add code for Kubernetes Deployment and Services configuration ymls
 
     // Deployment should define three replicas
+    // Service should be of type NodePort
 
 - Add code to Jenkinsfile which should go through these steps
 
@@ -32,11 +34,13 @@ Please follow the live [document](https://docs.google.com/document/d/17OwlITE-yP
     - Push to docker hub
 
         // This will require your DockerHub credentials setup in Jenkins credentials
+        // NOTE: We have skipped this step due to lack of test cases and issues with 
+        //      jenkins running docker containers while in a container
     
     ### Stage: Deploy
     - Instruct our ansible controller to start minikube, which will serve as our kubernetes control plane. 
     
-        // Because ansible is installed in the same instance as our Jenkins, we can run ansible commands (ad-hoc ro playbooks) from inside our jenkinsfile. 
+        // Because ansible is installed in the same instance as our Jenkins, we can run ansible commands (ad-hoc ro     playbooks) from inside our jenkinsfile. 
 
     - If our kubernetes.yml is filled out, we can have ansible apply it to our cluster.
     - Success! Kubernetes should have created 3 pods that are running our application. Try exposing the service and accessing the static web app!

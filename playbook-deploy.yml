@@ -6,14 +6,14 @@
     - name: apt update
       command: sudo apt update
 
-    - name: Get Minikube info
-      command: wget https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 
-      
-    - name: change permissions for minikube  
-      command: chmod +x minikube-linux-amd64
-      
-    - name: move minikube into local/bin/minikube
-      command: sudo mv minikube-linux-amd64 /usr/local/bin/minikube 
+  #  - name: Get Minikube info
+  #    command: wget https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 
+  #    
+  #  - name: change permissions for minikube  
+  #    command: chmod +x minikube-linux-amd64
+  #    
+  #  - name: move minikube into local/bin/minikube
+  #    command: sudo mv minikube-linux-amd64 /usr/local/bin/minikube 
     
     - name: Installing Prerequisites for Kubernetes
       apt: 
@@ -22,7 +22,7 @@
          - ca-certificates
          - curl
          - gnupg-agent
-         - vim
+         - nano
          - software-properties-common
         state: present
     
@@ -54,25 +54,25 @@
         name: docker
         enabled: yes
     
-    - name: Add Google official GPG key
-      apt_key:
-        url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
-        state: present
+    #- name: Add Google official GPG key
+    #  apt_key:
+    #    url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
+    #    state: present
     
-    - name: Add Kubernetes Repository
-      apt_repository:
-        repo: deb http://apt.kubernetes.io/ kubernetes-xenial main 
-        state: present
-        filename: kubernetes
-        mode: 0600
+    #- name: Add Kubernetes Repository
+    #  apt_repository:
+    #    repo: deb http://apt.kubernetes.io/ kubernetes-xenial main 
+    #    state: present
+    #    filename: kubernetes
+    #    mode: 0600
     
-    - name: Installing Kubernetes Cluster Packages.
-      apt: 
-        name:
-          - kubectl
-          - kubeadm
-          - kubelet
-        state: present
+    #- name: Installing Kubernetes Cluster Packages.
+    #  apt: 
+    #    name:
+    #      - kubectl
+    #      - kubeadm
+    #      - kubelet
+    #    state: present
     
     - name: Enable service kubelet, and enable persistently
       service: 
@@ -85,6 +85,11 @@
        # reboot_timeout: 40
         #connect_timeout: 60
         #test_command: uptime
+    
+    # This is what we will use in place of minikube
+    - name: install microk8s
+      snap:
+        - microk8s
 
 - name: Play 2
   hosts: tom@worker

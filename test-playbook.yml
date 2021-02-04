@@ -7,4 +7,5 @@
       command: apt update
 
     - name: do more
-      command: wget https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+      get url: https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+      command: 
